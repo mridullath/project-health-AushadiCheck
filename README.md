@@ -233,17 +233,26 @@ Future Improvements->
 
 --------------------------------------------------------------------------------------------
 
-A Basic / Older code for Understanding purpose ->
+A Basic Older code for Understanding purpose ->
 
 <!DOCTYPE html>
+
 <html lang="en">
+   
 <head>
+   
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Aushadhi - Indian Drug Interaction Checker</title>
+    
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <style>
         * {
             box-sizing: border-box;
