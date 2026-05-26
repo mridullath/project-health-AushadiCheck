@@ -1,4 +1,216 @@
-older code 
+AushadhiCheck — Drug Interaction & Medicine Search System
+
+A full-stack drug safety and interaction checking system designed for Indian medicines. The platform provides real-time search across generic and brand names, detects drug–drug interactions, and offers typo-tolerant intelligent suggestions. It features a Flask-powered backend with SQLite database, server-side pagination, and a responsive single-page interface, along with a local profile system that enables personalized interaction warnings based on user medications.
+
+A full-stack healthcare web application designed to help users safely explore medicines, detect drug–drug interactions, and receive personalized warnings based on their current medications by simply typing them. The system features intelligent typo-tolerant search across generic and brand names, a Flask-powered backend with server-side pagination, and a responsive single-page dashboard with a local profile system which will be used in future for real-time safety alerts.
+
+Note > It is only for personal information, a person should not change /self-medication on a medicine without a doctors / medical personals approval. For more info on it visit https://pmc.ncbi.nlm.nih.gov/articles/PMC4012703/ . 
+
+--------------------------------------------------------------------------------------------
+
+Overview ->
+
+India has a vast and diverse pharmaceutical ecosystem with hundreds of commonly used medications across brands and generics. However, lack of awareness about drug interactions and safe combinations often leads to adverse health effects.
+
+AushadhiCheck is a software system designed to simplify medicine discovery and improve drug safety awareness. It allows users to search medicines using both correct and misspelled queries, check interactions between drugs, and maintain a personal medication profile to receive instant safety warnings.
+
+The system combines fast full-text search (FTS5), fuzzy matching for typo correction, and a structured interaction database to deliver accurate and user-friendly results in real time.
+
+--------------------------------------------------------------------------------------------
+
+Features->
+
+. Real-time medicine search with instant typing response
+. Intelligent fuzzy matching (handles spelling mistakes like paracitamol → paracetamol)
+. Support for generic + brand name search
+. Server-side pagination for efficient large dataset handling
+. Drug–drug interaction checker with severity levels
+. Profile-based instant interaction warnings
+. Local profile system using browser localStorage
+. Responsive single-page UI with smooth navigation
+. Suggestion system with “Did you mean?” corrections
+. Fast Flask backend with optimized SQLite queries
+
+--------------------------------------------------------------------------------------------
+
+Project Structure->
+
+medchecker/
+│
+|-- frontend/
+|   |-- index.html        # Main UI (HTML, CSS, JS)
+|   |-- script.js         # Client-side logic (search, profile, interactions)
+|
+|-- app.py            # Flask API routes
+|-- database.py       # Query logic, search, fuzzy matching
+|-- aushadhi_v2.db    # SQLite database (included for demo)
+|
+|-- requirements.txt
+|-- README.md
+
+--------------------------------------------------------------------------------------------
+
+Tools and Technologies->
+
+Frontend > HTML5, CSS3, Vanilla JavaScript, Dynamic rendering & API integration 
+
+Backend  > Python, Flask, REST API architecture
+
+Database > SQLite, FTS5 (Full-Text Search for fast querying)
+
+Libraries> RapidFuzz (for typo-tolerant fuzzy search), SQLite3
+
+--------------------------------------------------------------------------------------------
+
+Search System->
+
+The search system operates in two layers:
+
+1. Fast Search (Primary)
+
+   . Uses SQLite FTS5
+   
+   . Supports prefix matching:
+   
+       para → paracetamol
+   
+2. Fuzzy Matching (Fallback)
+
+   Triggered when no results are found:
+
+       paracitamol → paracetamol
+   
+       dulo → dolo → paracetamol
+   
+  . Uses RapidFuzz similarity scoring
+   
+  . Matches against both:
+   
+       Generic names
+   
+       Brand names
+   
+--------------------------------------------------------------------------------------------
+
+
+Interaction Logic->
+
+The system checks interactions between two drugs using a structured database.
+
+Profile-Based Checking ->
+
+    . User saves current medications
+    
+    . When a new drug is viewed:
+    
+        . System checks interactions automatically
+        
+        . Displays warnings instantly
+
+--------------------------------------------------------------------------------------------
+
+Profile System ->
+
+. Stored using localStorage (client-side)
+
+. No external data storage
+
+. Fields include >
+
+    Current medicines
+    
+    Allergies
+    
+    Conditions
+    
+    Age & lifestyle
+    
+. Behavior >
+
+    Data persists across sessions
+    
+    Deleted only manually or via browser reset
+
+--------------------------------------------------------------------------------------------
+
+Setup and Installation->
+
+Prerequisites:
+
+    . Python 3.9+
+    
+    . flask
+    
+    . flask-cors
+    
+    . rapidfuzz
+    
+--------------------------------------------------------------------------------------------
+
+Running the Project->
+
+. python app.py [runs the backend]
+
+. open the website using the link [http://127.0.0.1:5000]
+
+--------------------------------------------------------------------------------------------
+
+Data and Index Methodology->
+
+. Medicine dataset includes:
+
+    . Generic names
+    
+    . Brand mappings
+    
+    . Categories
+    
+    . Usage and safety info
+    
+. Interaction dataset includes:
+
+    . Drug pairs
+    
+    . Severity classification
+
+    . Description
+    
+--------------------------------------------------------------------------------------------
+
+Known Limitations->
+
+. Dataset is limited (~100 medicines in demo)
+
+. Medication mentioned in Profile  is not directly checked
+
+. Interaction data is not exhaustive
+
+. No official Indian public API for drug interaction data
+
+. SQLite is file-based (not scalable for production)
+
+--------------------------------------------------------------------------------------------
+
+Future Improvements->
+
+. Expand dataset to 10,000+ medicines
+
+. Integrate official drug databases (if available)
+
+. Add authentication and cloud profile sync
+
+. Implement map-based or category-based filtering
+
+. Add severity color coding and UI enhancements
+
+. Make the profile section such that it auto checks for any interactions with current medicines and see for lifestyles problems.
+
+. Replace SQLite with PostgreSQL for scalability
+
+--------------------------------------------------------------------------------------------
+
+A Basic / Older code for Understanding purpose ->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
